@@ -7,11 +7,36 @@ public class Derivative {
     public ArrayList<String> reorderADD1 (ArrayList<String> equation){
         for (int i=0; i< equation.size(); i++){
           if (equation.get(i).indexOf("^")==-1 & equation.get(i).indexOf("x")!=-1 ){
-              equation.set(i,equation.get(i)+ "^1");
+              if (equation.get(i).indexOf("x")==0) {
+                  equation.set(i, "1"+equation.get(i) + "^1");
+              }
+              else{ equation.set(i, "1"+equation.get(i) + "^1");}
+
           }
         }
 
         return equation;
+    }
+    public void simplifyPoly(ArrayList<String> equation){
+        reorderADD1(equation);
+        int equalCoefficent=0;
+        for (int i=0; i< equation.size(); i++){
+            for (int g=i+1; g< equation.size(); g++){
+                if (equation.get(i).indexOf("^")==-1 && equation.get(g).indexOf("^")==-1){
+                    equalCoefficent= Integer.parseInt(equation.get(i))+ Integer.parseInt(equation.get(g));
+
+
+                }
+              else if(Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^")+1))==Integer.parseInt(equation.get(g).substring(equation.get(g).indexOf("^")+1))){
+                    equalCoefficent=Integer.parseInt(equation.get(i).substring(0,equation.get(i).indexOf("x")))+ Integer.parseInt(equation.get(g).substring(0,equation.get(g).indexOf("x")));
+                    System.out.println("hello" +equalCoefficent);
+                }
+                }
+
+
+
+            }
+
     }
 
 
@@ -84,16 +109,36 @@ public class Derivative {
 
               for (int i=0; i< firstderivative.size(); i++){
                   for (int g=0; g< gEquation.size(); g++){
-                      if (firstderivative.get(i).length()!=0 &&firstderivative.get(i).indexOf("x")==-1 && firstderivative.get(i).indexOf("^")==-1){
-                          cofficent= Integer.parseInt(firstderivative.get(i));
-                          exponent=0;
-                      }
-                      if ( gEquation.get(g).length()!=0 && gEquation.get(g).indexOf("x")==-1 && gEquation.get(g).indexOf("^")!=-1){
-                          cofficent= Integer.parseInt(gEquation.get(g));
-                          System.out.println(cofficent);
-                          sExponent=0;
+                      if (firstderivative.get(i).indexOf("^")==-1|| gEquation.get(g).indexOf("^")==-1) {
+                          if (firstderivative.get(i).length() != 0 && firstderivative.get(i).indexOf("x") == -1) {
+                              cofficent = Integer.parseInt(firstderivative.get(i));
+                              exponent = 0;
+                          }
+                          if (gEquation.get(g).length() != 0 && gEquation.get(g).indexOf("x") == -1) {
+                              secondCoeficent = Integer.parseInt(gEquation.get(g));
+                              System.out.println(cofficent);
+                              sExponent = 0;
 
+                          }
+                          if (firstderivative.get(i).indexOf("x") != -1){
+                              if (firstderivative.get(i).indexOf("x") == 0){
+                                  cofficent= 1;
+                                  exponent=1;
+                              }
+                              else{
+                                  cofficent= Integer.parseInt(firstderivative.get(i).substring(0, firstderivative.get(i).indexOf("x")));
+                                  exponent=1;
+                              }
+                          }
+                          if ( gEquation.get(g).indexOf("x")  != -1){
+                              if (gEquation.get(g).indexOf("x")==0){secondCoeficent=1; exponent=1; }
+                              else{
+                                  secondCoeficent=Integer.parseInt(gEquation.get(g).substring(0, gEquation.get(g).indexOf("x")));
+                                  exponent=0;
+                              }
+                          }
                       }
+
                  else if (firstderivative.get(i).indexOf("x")!=0 &&  gEquation.get(g).indexOf("x")!=0) {
                           if (firstderivative.get(i).indexOf("x")==-1){
                               cofficent= Integer.parseInt(firstderivative.get(i));

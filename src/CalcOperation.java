@@ -72,6 +72,12 @@ public class CalcOperation extends JFrame implements ActionListener {
         int num1, num2, num = 0;
         num1 = Integer.parseInt(txtField1.getText());
         num2 = Integer.parseInt(txtField2.getText());
+        Derivative de= new Derivative();
+        ArrayList<String> derivative= new ArrayList<String >();
+        derivative.add("3x^2");
+        derivative.add("2x");
+        derivative.add("3");
+        de.powerRule(derivative);
     }
 }
 
