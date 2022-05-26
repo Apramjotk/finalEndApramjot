@@ -35,13 +35,13 @@ public class Derivative {
         ArrayList<String> newSimplifiedPoly = new ArrayList<String>();
         ArrayList<String> reorder = new ArrayList<String>();
         int length = equation.size();
-        for (int i = 0; i < equation.size() - 1; i++) {
+       /* for (int i = 0; i < equation.size() - 1; i++) {
             if (equation.get(i).indexOf("^") != -1 ) {
                 simplifiedPoly.add(equation.get(i).substring(equation.get(i).indexOf("^") + 1));
             } else {
                 simplifiedPoly.add(0 + "");
             }
-            Collections.sort(simplifiedPoly);
+            //Collections.sort(simplifiedPoly);
         }
         for (int i = simplifiedPoly.size() - 1; i >= 0; i--) {
             newSimplifiedPoly.add(simplifiedPoly.get(i));
@@ -58,7 +58,7 @@ public class Derivative {
                }
 
            }
-       }
+       }*/
         System.out.println(reorder);
     }
 
@@ -82,30 +82,28 @@ public class Derivative {
         ArrayList<String> simplifiedPoly= new ArrayList<String>();
         int equalCoefficent=0;
 
-        for (int i=0; i< equation.size(); i++){
-            for (int g=i+1; g< equation.size(); g++){
-
-                if (equation.get(i).indexOf("^")==-1 && equation.get(g).indexOf("^")==-1){
-                    sameExpoonent= true;
-                    equalCoefficent= Integer.parseInt(equation.get(i))+ Integer.parseInt(equation.get(g));
-                    simplifiedPoly.add(""+ equalCoefficent);
+        for (int i=0; i< 2; i++) {
+            int firstTermCofficent= Integer.parseInt(equation.get(i).substring(0, equation.get(i).indexOf("x")));
+            for (int g = 0; g < equation.size(); g++) {
+                String sameCoefficent = equation.get(i);
 
 
-                }
 
-               if(Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^")+1))==Integer.parseInt(equation.get(g).substring(equation.get(g).indexOf("^")+1))){
+                    if (i!=g && Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^") + 1)) == Integer.parseInt(equation.get(g).substring(equation.get(g).indexOf("^") + 1))) {
 
-                  sameExpoonent= true;
-                    equalCoefficent+= Integer.parseInt(equation.get(g).substring(0,equation.get(g).indexOf("x")));
-                    simplifiedPoly.add(equalCoefficent+ "x^"+equation.get(i).substring(equation.get(i).indexOf("^")+1 ));
-                }
+                        sameExpoonent = true;
+                        equalCoefficent += Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x")));
+                        System.out.println(equalCoefficent);
+                        simplifiedPoly.add(firstTermCofficent+equalCoefficent + "x^" + equation.get(i).substring(equation.get(i).indexOf("^") + 1));
+                    }
 
 
-                }
+
 
 
 
             }
+        }
         System.out.println("Simplied:"+ simplifiedPoly);
 
     }
@@ -230,8 +228,43 @@ public class Derivative {
             }
             System.out.println(removePowerTo1(productRule));
            }
+           public String polyForm (ArrayList<String> polynominal){
+                String polyForm="";
+              for (int i=0; i< polynominal.size(); i++){
+                  if ( i==0){
+                      polyForm= polynominal.get(i);
+                  }
+                  else {
+                      polyForm += " + " + polynominal.get(i);
+                  }
+              }
+              return polyForm;
+           }
            public void quotientRule(ArrayList<String> fEquation,ArrayList<String> gEquation){
+               ArrayList<String> firstderivative = new ArrayList<String>();
+               ArrayList<String>  secondDerivative = new ArrayList<String>();
+               firstderivative = reorderADD1(powerRule(fEquation));
+               secondDerivative= reorderADD1(powerRule(gEquation));
+               gEquation= reorderADD1(gEquation);
+               fEquation= reorderADD1(fEquation);
+               ArrayList<String>  firstQuotientRule = new ArrayList<String>();
+               ArrayList<String> quotientRule = new ArrayList<String>();
+               ArrayList<String>  secondQuotientRule = new ArrayList<String>();
+               firstQuotientRule=factor(firstderivative,gEquation);
+               secondQuotientRule=factor(secondDerivative, fEquation);
+               for (int i=0; i< firstQuotientRule.size(); i++){
 
+                   quotientRule.add( firstQuotientRule.get(i));
+               }
+
+               quotientRule.add("-"+secondQuotientRule.get(0));
+               for (int i=1; i< secondQuotientRule.size(); i++){
+
+                       quotientRule.add(secondQuotientRule.get(i));
+
+
+               }
+               System.out.println("("+polyForm(removePowerTo1(quotientRule))+") /"+" ("+ polyForm(removePowerTo1(gEquation))+ ")^2");
 
            }
 
