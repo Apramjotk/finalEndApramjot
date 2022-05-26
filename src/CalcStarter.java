@@ -6,12 +6,15 @@ public class CalcStarter {
         CalcOperation demo = new CalcOperation();
         Derivative de= new Derivative();
         ArrayList<String> derivative= new ArrayList<String>();
-        derivative.add("2x^7");
-        derivative.add("3x^7");
-        derivative.add("1x^2");
-        derivative.add("6");
+        //derivative.add("8x^8");
+        derivative.add("3x");
+        derivative.add("-5x");
+       // derivative.add("6x^2");
         derivative.add("1");
-       de.simplifyPoly( derivative);
+        derivative.add("3");
+       // de.reoderPoly(derivative);
+      // de.simplifyPoly( derivative);
+
         System.out.println(de.powerRule(derivative));
         de.productRule(derivative, derivative);
 
