@@ -3,6 +3,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.applet.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
 
 
 public class Derivative {
@@ -35,7 +40,7 @@ public class Derivative {
         ArrayList<String> newSimplifiedPoly = new ArrayList<String>();
         ArrayList<String> reorder = new ArrayList<String>();
         int length = equation.size();
-       /* for (int i = 0; i < equation.size() - 1; i++) {
+       for (int i = 0; i < equation.size() - 1; i++) {
             if (equation.get(i).indexOf("^") != -1 ) {
                 simplifiedPoly.add(equation.get(i).substring(equation.get(i).indexOf("^") + 1));
             } else {
@@ -58,22 +63,27 @@ public class Derivative {
                }
 
            }
-       }*/
-        System.out.println(reorder);
-    }
+       }
+        //System.out.println(reorder);
 
-        /*int index=0;
+
+        int index=0;
         int sIndex=0;
         for (int i=0; i< equation.size()-1; i++) {
             if (Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^")+1))==max){
                 simplifiedPoly.add(index,equation.get(i));
                 equation.remove(i);
-                i--;
+                max--;
             }
             if (Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^")+1))>min){
                 simplifiedPoly.add(index,equation.get(i));
             }
-        }*/
+
+        }
+        System.out.println(reorder);
+        }
+
+
 
 
     public void simplifyPoly(ArrayList<String> equation){
@@ -81,30 +91,41 @@ public class Derivative {
         boolean sameExpoonent= false;
         ArrayList<String> simplifiedPoly= new ArrayList<String>();
         int equalCoefficent=0;
-
-        for (int i=0; i< 2; i++) {
+        int x=0;
+       int totalSum=0;
+        for (int i=0; i< equation.size(); i++) {
             int firstTermCofficent= Integer.parseInt(equation.get(i).substring(0, equation.get(i).indexOf("x")));
-            for (int g = 0; g < equation.size(); g++) {
+            //System.out.println(firstTermCofficent);
+            for (int g = i+1; g < equation.size(); g++) {
                 String sameCoefficent = equation.get(i);
 
+                //equalCoefficent= Integer.parseInt(equation.get(i).substring(0, equation.get(i).indexOf("x")));
 
 
-                    if (i!=g && Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^") + 1)) == Integer.parseInt(equation.get(g).substring(equation.get(g).indexOf("^") + 1))) {
-
+                    if ( i!=g && Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^") + 1)) == Integer.parseInt(equation.get(g).substring(equation.get(g).indexOf("^") + 1))) {
+                        System.out.println();
                         sameExpoonent = true;
-                        equalCoefficent += Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x")));
-                        System.out.println(equalCoefficent);
-                        simplifiedPoly.add(firstTermCofficent+equalCoefficent + "x^" + equation.get(i).substring(equation.get(i).indexOf("^") + 1));
+                        System.out.println("Hello2 " + equalCoefficent);
+                        System.out.println("Hello" +Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x"))));
+                          x+= Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x")));
+                           equalCoefficent=x;
+                        System.out.println("Add"+x);
+
+                        equation.remove(g);
+                        g--;
+
+
                     }
 
-
-
-
-
+                     System.out.println("Round"+ firstTermCofficent);
 
             }
+
+
+            //System.out.println(firstTermCofficent);
+            simplifiedPoly.add(equalCoefficent + "x^" + equation.get(i).substring(equation.get(i).indexOf("^") + 1));
         }
-        System.out.println("Simplied:"+ simplifiedPoly);
+       System.out.println("Simplied:"+ simplifiedPoly);
 
     }
     public ArrayList<String> removePowerTo1(ArrayList<String> equation) {
