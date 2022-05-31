@@ -11,8 +11,19 @@ import java.util.*;
 
 
 public class Derivative {
+    ArrayList<String> equation= new ArrayList<String>();
+    public Derivative(ArrayList<String> equation){
+        this. equation= equation;
+    }
+    public String slopeWithDerivative(String xValue){
+        firstDerivative first= new firstDerivative(equation);
 
-
+        return first.slopeWithDerivative(xValue);
+    }
+    public String tangentLine(String xValue){
+        firstDerivative first= new firstDerivative(equation);
+        return  first.tangentLine(xValue);
+    }
 
     public ArrayList<String> reorderADD1 (ArrayList<String> equation){
         for (int i=0; i< equation.size(); i++){
@@ -32,102 +43,88 @@ public class Derivative {
         return equation;
     }
 
-    public void reoderPoly(ArrayList<String> equation) {
-        reorderADD1(equation);
+    public String reoderPoly(ArrayList<String> equation2) {
+        equation = reorderADD1(equation2);
+        System.out.println(equation);
         int max = 0;
         int min = -1;
         ArrayList<String> simplifiedPoly = new ArrayList<String>();
         ArrayList<String> newSimplifiedPoly = new ArrayList<String>();
         ArrayList<String> reorder = new ArrayList<String>();
+        ArrayList<String> collection = new ArrayList<String>();
+
         int length = equation.size();
-       for (int i = 0; i < equation.size() - 1; i++) {
-            if (equation.get(i).indexOf("^") != -1 ) {
+        for (int i = 0; i < equation.size(); i++) {
+            if (equation.get(i).indexOf("^") != -1) {
                 simplifiedPoly.add(equation.get(i).substring(equation.get(i).indexOf("^") + 1));
+                System.out.println(simplifiedPoly);
             } else {
                 simplifiedPoly.add(0 + "");
             }
-            //Collections.sort(simplifiedPoly);
+            Collections.sort(simplifiedPoly);
         }
         for (int i = simplifiedPoly.size() - 1; i >= 0; i--) {
             newSimplifiedPoly.add(simplifiedPoly.get(i));
         }
+        System.out.println(newSimplifiedPoly);
         LinkedHashSet<String> hashSet = new LinkedHashSet<>(newSimplifiedPoly);
 
         ArrayList<String> listWithoutDuplicates = new ArrayList<String>(hashSet);
         System.out.println("Max" + listWithoutDuplicates);
 
-       for (int b = 0; b <listWithoutDuplicates.size(); b++) {
-           for (int i = 0; i <equation.size(); i++) {
-               if (equation.get(i).indexOf("^") != -1 && Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^") + 1)) == Integer.parseInt(newSimplifiedPoly.get(b))) {
-                   reorder.add(b, equation.get(i));
-               }
-
-           }
-       }
-        //System.out.println(reorder);
+        for (int i = 0; i < newSimplifiedPoly.size(); i++) {
+            for (int g = 0; g < equation.size(); g++) {
+                if (newSimplifiedPoly.get(i).equals(equation.get(g).substring(equation.get(g).indexOf("^") + 1))) {
+                    reorder.add(i, equation.get(g));
+                    collection.add(equation.remove(g));
+                    g--;
 
 
-        int index=0;
-        int sIndex=0;
-        for (int i=0; i< equation.size()-1; i++) {
-            if (Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^")+1))==max){
-                simplifiedPoly.add(index,equation.get(i));
-                equation.remove(i);
-                max--;
-            }
-            if (Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^")+1))>min){
-                simplifiedPoly.add(index,equation.get(i));
+                }
+
             }
 
+
         }
-        System.out.println(reorder);
-        }
+      return  polyForm(removePowerTo1(collection));
+    }
 
 
 
 
     public void simplifyPoly(ArrayList<String> equation){
-        reorderADD1(equation);
+        //equation=reoderPoly(reorderADD1(equation));
+        System.out.println("Hw" +equation);
         boolean sameExpoonent= false;
         ArrayList<String> simplifiedPoly= new ArrayList<String>();
         int equalCoefficent=0;
         int x=0;
        int totalSum=0;
-        for (int i=0; i< equation.size(); i++) {
-            int firstTermCofficent= Integer.parseInt(equation.get(i).substring(0, equation.get(i).indexOf("x")));
-            //System.out.println(firstTermCofficent);
-            for (int g = i+1; g < equation.size(); g++) {
-                String sameCoefficent = equation.get(i);
-
-                //equalCoefficent= Integer.parseInt(equation.get(i).substring(0, equation.get(i).indexOf("x")));
 
 
-                    if ( i!=g && Integer.parseInt(equation.get(i).substring(equation.get(i).indexOf("^") + 1)) == Integer.parseInt(equation.get(g).substring(equation.get(g).indexOf("^") + 1))) {
-                        System.out.println();
-                        sameExpoonent = true;
-                        System.out.println("Hello2 " + equalCoefficent);
-                        System.out.println("Hello" +Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x"))));
-                          x+= Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x")));
-                           equalCoefficent=x;
-                        System.out.println("Add"+x);
+                   // System.out.println("Hello2 " + equalCoefficent);
 
-                        equation.remove(g);
-                        g--;
+                   // equalCoefficent+= Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x")));
+                    //System.out.println("Hello" + Integer.parseInt(equation.get(g).substring(0, equation.get(g).indexOf("x"))));
+                    //equation.remove(g);
+                   // g--;
 
 
-                    }
+                }
 
-                     System.out.println("Round"+ firstTermCofficent);
+                    //simplifiedPoly.add(equalCoefficent + "x^" + equation.get(i).substring(equation.get(i).indexOf("^") + 1));
 
-            }
+
+
+
+
 
 
             //System.out.println(firstTermCofficent);
-            simplifiedPoly.add(equalCoefficent + "x^" + equation.get(i).substring(equation.get(i).indexOf("^") + 1));
-        }
-       System.out.println("Simplied:"+ simplifiedPoly);
 
-    }
+
+
+
     public ArrayList<String> removePowerTo1(ArrayList<String> equation) {
         for (int i = 0; i < equation.size(); i++) {
             if (equation.get(i).indexOf("x^0")!=-1){
@@ -145,9 +142,8 @@ public class Derivative {
         ArrayList<String> firstderivative = new ArrayList<String>();
             for (int i = 0; i < equation.size(); i++) {
                 int coefficent = equation.get(i).indexOf("x");
-                System.out.println(coefficent);
+
                 int exponent = equation.get(i).indexOf("^");
-                System.out.println(exponent);
                 if (exponent == -1 || Integer.parseInt(equation.get(i).substring(exponent + 1)) == 1) {
                     if (coefficent == 0) {
                         firstderivative.add("1");
@@ -162,7 +158,7 @@ public class Derivative {
 
                     if (coefficent != 0) {
                         coefficent = Integer.parseInt(equation.get(i).substring(0, coefficent));
-                        System.out.println(coefficent);
+
                     } else {
                         coefficent = 1;
                     }
@@ -192,7 +188,7 @@ public class Derivative {
 
             }
 
-            System.out.println(derivativeForm);
+
             return firstderivative;
         }
         public ArrayList<String> factor(ArrayList<String> fEquation,ArrayList<String> gEquation){
@@ -229,7 +225,7 @@ public class Derivative {
             return distributePoly;
         }
 
-        public void productRule(ArrayList<String> fEquation,ArrayList<String> gEquation ){
+        public ArrayList<String> productRule(ArrayList<String> fEquation, ArrayList<String> gEquation ){
             ArrayList<String> firstderivative = new ArrayList<String>();
             ArrayList<String>  secondDerivative = new ArrayList<String>();
             ArrayList<String>  firstProductRule = new ArrayList<String>();
@@ -247,10 +243,11 @@ public class Derivative {
             for (int i=0; i< secondProductRule.size(); i++){
                 productRule.add(secondProductRule.get(i));
             }
-            System.out.println(removePowerTo1(productRule));
+             return productRule;
            }
            public String polyForm (ArrayList<String> polynominal){
                 String polyForm="";
+                removePowerTo1(polynominal);
               for (int i=0; i< polynominal.size(); i++){
                   if ( i==0){
                       polyForm= polynominal.get(i);
@@ -261,7 +258,7 @@ public class Derivative {
               }
               return polyForm;
            }
-           public void quotientRule(ArrayList<String> fEquation,ArrayList<String> gEquation){
+           public String quotientRule(ArrayList<String> fEquation,ArrayList<String> gEquation){
                ArrayList<String> firstderivative = new ArrayList<String>();
                ArrayList<String>  secondDerivative = new ArrayList<String>();
                firstderivative = reorderADD1(powerRule(fEquation));
@@ -285,7 +282,7 @@ public class Derivative {
 
 
                }
-               System.out.println("("+polyForm(removePowerTo1(quotientRule))+") /"+" ("+ polyForm(removePowerTo1(gEquation))+ ")^2");
+              return "("+polyForm(removePowerTo1(quotientRule))+") /"+" ("+ polyForm(removePowerTo1(gEquation))+ ")^2";
 
            }
 

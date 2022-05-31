@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -26,58 +28,102 @@ import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 
 public class CalcOperation extends JFrame implements ActionListener {
-        JLabel  firstL;
-        JLabel secondL;
-        JLabel third1;
-        JButton btnPlus, btnMinus, btnMultiply, btnClear;
-        JTextField txtField1, txtField2, txtField3;
-        public CalcOperation(){
-            setLayout(new GridLayout(6,2));
-            setTitle("Calc, Basic Arthemtic,equation solver and phyatageron theorem ");
-            for (int i=0; i< 3; i++) {
-                firstL = new JLabel("    Number" +1 +" :", JLabel.LEFT);
-            }
-            secondL = new JLabel("     Number 2 :",JLabel.LEFT);
+
+            JLabel label1, label2, label3;
+
+            JButton btnMode, btnPlus, btnMinus, btnMultiply, btnDivide, btnClear, btnRange, btnMean;
+            JTextField txtField1, txtField2, txtField3,  txtField4;
+
+         public CalcOperation(){
+                setLayout(new GridLayout(10,10));
+                setTitle("Basic operation calculator");
+                //initializing label
+
+                 label1 = new JLabel("Numbers :");
+                 label3 = new JLabel("Result :", JLabel.LEFT);
+
+                 //initializing buttons;
+                 btnPlus = new JButton("Add Nums");
+                 btnMinus = new JButton("Subtract Nums");
+                 btnMultiply = new JButton("Multiply Nums");
+                 btnDivide = new JButton("Divide Nums");
+                 btnRange = new JButton("Range of Nums");
+                 btnMean = new JButton("Mean of Nums");
+                 btnMode = new JButton("Mode of Nums");
+                 btnClear = new JButton("Clear");
+
+                 //adding eventlistener
+                 btnPlus.addActionListener(this);
+                 btnMinus.addActionListener(this);
+                 btnMultiply.addActionListener(this);
+                 btnDivide.addActionListener(this);
+                 btnRange.addActionListener(this);
+                 btnMean.addActionListener(this);
+                 btnMode.addActionListener(this);
+                 btnClear.addActionListener(this);
+                 //initializing textfield
+                 //for(int i = 0; i < 3; i++)
+                 txtField1 = new JTextField();
+                 txtField2 = new JTextField();
+                 txtField3 = new JTextField();
+
+                 //adding to the frame
+                 add(label1);
+                 add(txtField1);
 
 
-            btnPlus = new JButton(" Calculus");
-            btnMinus = new JButton("Arthimetic");
-            btnMultiply = new JButton("Geometry");
-            btnClear = new JButton("Equation ");
-            btnPlus.addActionListener(this);
-            btnMinus.addActionListener(this);
-            btnMultiply.addActionListener(this);
-            btnClear.addActionListener(this);
-            //initializing textfield
-            //for(int i = 0; i < 3; i++)
-            txtField1 = new JTextField();
-            txtField2 = new JTextField();
-            txtField3 = new JTextField();
+                 add(label3);
+                 add(txtField3);
+                 add(btnPlus);
+                 add(btnMinus);
+                 add(btnMultiply);
+                 add(btnDivide);
+                 add(btnRange);
+                 add(btnMean);
+                 add(btnMode);
+                 add(btnClear);
 
-            //adding to the frame
-            add(firstL,0);
-            add(txtField1);
-            add(secondL);
-            add(txtField2);
-            add(btnPlus);
-            add(btnMinus);
-            add(btnMultiply);
-            add(btnClear);
+
         }//end of constructor
 
 
     @Override
+
     public void actionPerformed(ActionEvent e) {
+
         String opt = e.getActionCommand();
-        int num1, num2, num = 0;
-        num1 = Integer.parseInt(txtField1.getText());
-        num2 = Integer.parseInt(txtField2.getText());
-        Derivative de= new Derivative();
-        ArrayList<String> derivative= new ArrayList<String >();
-        derivative.add("3x^2");
-        derivative.add("2x");
-        derivative.add("3");
-        de.powerRule(derivative);
+        String result="";
+        int length=0;
+        ArrayList<String> numbers= new ArrayList<>();
+        System.out.println(txtField1.getText());
+        String [] numberSet= txtField1.getText().split(",");
+        Collections.addAll(numbers, numberSet);
+        System.out.println(numbers);
+        basicCalculations bc= new basicCalculations(numbers);
+
+        if(opt.equals("Add Nums"))
+            result=bc.totalSumNumbers();
+        else if(opt.equals("Subtract Nums"))
+            result=bc.totalDifferencNumbers();
+        else if(opt.equals("Multiply Nums"))
+            result=bc.mutiplyNumbers();
+        else if(opt.equals("Divide Nums"))
+            result=bc.divideNumbers();
+        else if (opt.equals("Range of Nums")){
+            result= bc.rangeOfNumbers();
+        }
+        else if (opt.equals("Mean of Nums")){
+            result= ""+bc.meanOfNumbers();
+        }
+        else if (opt.equals("Mode of Nums")){
+            result= bc.modeOfNumbers();
+        }
+        else if(opt.equals("Clear")){
+            txtField1.setText("");
+        }
+        txtField3.setText(result);
+
+
     }
 }
 
