@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class basicCalculations {
+public class BasicCalculationsCalc {
     private ArrayList<String> numbers= new ArrayList<>();
     boolean anyDoubles;
 
 
-    public basicCalculations(ArrayList<String>userNumbers){
+    public BasicCalculationsCalc(ArrayList<String>userNumbers){
         numbers= userNumbers;
         for (int i=0; i<numbers.size(); i++){
             if (numbers.get(i).indexOf(".")!=-1){

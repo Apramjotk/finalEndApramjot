@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
-public class firstDerivative extends Derivative{
+public class FirstDerivativeCalc extends DerivativeCalc {
 
     ArrayList<String> equation2= new ArrayList<String>();
     private String xValue;
 
-    public firstDerivative( ArrayList<String> equation){
+    public FirstDerivativeCalc(ArrayList<String> equation){
 
         super(equation);
 

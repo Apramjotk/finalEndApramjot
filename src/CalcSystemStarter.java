@@ -1,11 +1,9 @@
 import javax.swing.JFrame;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class CalcStarter {
+public class CalcSystemStarter {
     public static void main(String[] args) {
-
-        runFrameCalculator de= new runFrameCalculator();
+        CalcOptionsDisplay de= new CalcOptionsDisplay();
         de.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        de.setVisible(true);
         de.setSize(1600,800);
@@ -28,17 +26,17 @@ public class CalcStarter {
          numbers.add("+1");
          numbers.add("*8");
          numbers.add("+3");
-       //Derivative de= new Derivative(derivative);
-        //GeometryCalc  gc= new GeometryCalc("3", "6");
+        DerivativeCalc be= new DerivativeCalc(derivative);
+        GeometryCalc  gc= new GeometryCalc("3", "6");
         //basicCalculations bc= new basicCalculations(numbers);
         //System.out.println(bc.caculateOfNumbers());
        // System.out.println(gc.missingLength(true));
         //System.out.println(gc.areaCircle());
         //de.quotientRule(derivative, derivative);
-        //de.reoderPoly(derivative);
+        //System.out.println(be.reoderPoly(derivative));
        //de.simplifyPoly( derivative));
         //Derivative bd= new Derivative(derivative);
-       //System.out.println( bd.slopeWithDerivative("2"));
+       System.out.println( be.slopeWithDerivative("2"));
        //firstDerivative bd= new Derivative(derivative);
        //System.out.println( );
         //System.out.println( );

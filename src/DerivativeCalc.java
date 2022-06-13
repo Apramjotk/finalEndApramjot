@@ -1,27 +1,20 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.applet.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 
-
-public class Derivative {
+public class DerivativeCalc {
     ArrayList<String> equation= new ArrayList<String>();
-    public Derivative(ArrayList<String> equation){
+    public DerivativeCalc(ArrayList<String> equation){
         this. equation= equation;
     }
     public String slopeWithDerivative(String xValue){
-        firstDerivative first= new firstDerivative(equation);
+        FirstDerivativeCalc first= new FirstDerivativeCalc(equation);
 
         return first.slopeWithDerivative(xValue);
     }
     public String tangentLine(String xValue){
-        firstDerivative first= new firstDerivative(equation);
+        FirstDerivativeCalc first= new FirstDerivativeCalc(equation);
         return  first.tangentLine(xValue);
     }
 
@@ -45,7 +38,7 @@ public class Derivative {
 
     public String reoderPoly(ArrayList<String> equation2) {
         equation = reorderADD1(equation2);
-        System.out.println(equation);
+
         int max = 0;
         int min = -1;
         ArrayList<String> simplifiedPoly = new ArrayList<String>();
@@ -57,7 +50,7 @@ public class Derivative {
         for (int i = 0; i < equation.size(); i++) {
             if (equation.get(i).indexOf("^") != -1) {
                 simplifiedPoly.add(equation.get(i).substring(equation.get(i).indexOf("^") + 1));
-                System.out.println(simplifiedPoly);
+
             } else {
                 simplifiedPoly.add(0 + "");
             }
@@ -66,11 +59,10 @@ public class Derivative {
         for (int i = simplifiedPoly.size() - 1; i >= 0; i--) {
             newSimplifiedPoly.add(simplifiedPoly.get(i));
         }
-        System.out.println(newSimplifiedPoly);
+
         LinkedHashSet<String> hashSet = new LinkedHashSet<>(newSimplifiedPoly);
 
         ArrayList<String> listWithoutDuplicates = new ArrayList<String>(hashSet);
-        System.out.println("Max" + listWithoutDuplicates);
 
         for (int i = 0; i < newSimplifiedPoly.size(); i++) {
             for (int g = 0; g < equation.size(); g++) {
@@ -94,7 +86,6 @@ public class Derivative {
 
     public void simplifyPoly(ArrayList<String> equation){
         //equation=reoderPoly(reorderADD1(equation));
-        System.out.println("Hw" +equation);
         boolean sameExpoonent= false;
         ArrayList<String> simplifiedPoly= new ArrayList<String>();
         int equalCoefficent=0;
