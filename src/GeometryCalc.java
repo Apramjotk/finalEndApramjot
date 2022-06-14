@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 
 public class GeometryCalc {
     private String length1;
     private String length2;
-    private boolean isDoubleFormat;
+
 
     public GeometryCalc(String length1, String length2){
         this.length1=length1;
@@ -14,28 +13,26 @@ public class GeometryCalc {
 
     public String missingLength( boolean isMissingHypotense){
         double missingL=0;
-         String missingLength="";
+        String missingLength="";
         if (isMissingHypotense){
 
-                missingL= Math.sqrt( (Double.parseDouble(length1) * Double.parseDouble(length1)) + (Double.parseDouble(length2)* Double.parseDouble(length2)));
-                missingLength+= "The hypotense is: "+  missingL;
+            missingL= Math.sqrt( (Double.parseDouble(length1) * Double.parseDouble(length1)) + (Double.parseDouble(length2)* Double.parseDouble(length2)));
+            missingLength+= "The hypotense is: "+  missingL;
 
         }
-        else{
-                missingL= Math.sqrt( Math.abs(Double.parseDouble(length1) * Double.parseDouble(length1) - (Double.parseDouble(length2)* Double.parseDouble(length2))));
-                missingLength+= "The missing length is: "+  missingL;
+        else
+        {
+            missingL= Math.sqrt( Math.abs(Double.parseDouble(length1) * Double.parseDouble(length1) - (Double.parseDouble(length2)* Double.parseDouble(length2))));
+            missingLength+= "The missing length is: "+  missingL;
 
         }
         return missingLength;
     }
 
-    public String areaTriangle(){
+    public String areaTriangle()
+    {
         String area=  "";
-
-            area+=  ((Double.parseDouble(length1)*Double.parseDouble(length2))/2);
-
-
-
+        area+=  ((Double.parseDouble(length1)*Double.parseDouble(length2))/2);
         return area;
     }
     public String areaRectangle(){

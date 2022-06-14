@@ -1,6 +1,5 @@
 import java.awt.*;
 import javax.swing.JFrame;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -63,8 +62,6 @@ public class CalcOptionsDisplay extends JFrame implements ActionListener {
             de.setVisible(true);
             de.setSize(800,800);
 
-
-
         }
         if (e.getActionCommand().equals("Find Derivative with Product Rule")){
 
@@ -79,7 +76,6 @@ public class CalcOptionsDisplay extends JFrame implements ActionListener {
             de.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             de.setVisible(true);
             de.setSize(800,800);
-
         }
 
         if (e.getActionCommand().equals("Find mean, mode and range")){

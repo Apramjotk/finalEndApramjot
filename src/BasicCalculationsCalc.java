@@ -6,7 +6,8 @@ public class BasicCalculationsCalc {
     boolean anyDoubles;
 
 
-    public BasicCalculationsCalc(ArrayList<String>userNumbers){
+    public BasicCalculationsCalc(ArrayList<String>userNumbers)
+    {
         numbers= userNumbers;
         for (int i=0; i<numbers.size(); i++){
             if (numbers.get(i).indexOf(".")!=-1){
@@ -21,7 +22,8 @@ public class BasicCalculationsCalc {
         }
     }
 
-    public String totalSumNumbers(){
+    public String totalSumNumbers()
+    {
         int wholeSum=0;
         String totalAddition= "";
         boolean displayAsDoubles= false;
@@ -46,12 +48,14 @@ public class BasicCalculationsCalc {
         return totalAddition;
     }
 
-    public String totalDifferencNumbers(){
+    public String totalDifferencNumbers()
+    {
         int wholeDifference=0;
         String totalAddition= "Total Difference is: ";
         boolean displayAsDoubles= false;
         double totalDifference=Double.parseDouble(numbers.get(0));
-        for (int i=1; i<numbers.size(); i++){
+        for (int i=1; i<numbers.size(); i++)
+        {
 
                 totalDifference-=Double.parseDouble(numbers.get(i));
                 displayAsDoubles= true;
@@ -62,16 +66,15 @@ public class BasicCalculationsCalc {
 
         return totalAddition;
     }
-    public String mutiplyNumbers() {
-        int wholeMultipication = 0;
+
+    public String mutiplyNumbers()
+    {
         String totalMutiplication = "Total Multipication is: ";
-        boolean displayAsDoubles = false;
         double totalMutiply = Double.parseDouble(numbers.get(0));
-        for (int i = 1; i < numbers.size(); i++) {
+        for (int i = 1; i < numbers.size(); i++)
+        {
 
                 totalMutiply *= Double.parseDouble(numbers.get(i));
-                displayAsDoubles = true;
-
 
         }
 
@@ -79,43 +82,49 @@ public class BasicCalculationsCalc {
 
         return totalMutiplication;
     }
-        public String divideNumbers(){
-            String totalDivision= "Total Division is: ";
-            boolean displayAsDoubles = false;
-            double totalDivide=Double.parseDouble(numbers.get(0));
-            for (int i=1; i<numbers.size(); i++){
 
-                    totalDivide/=Double.parseDouble(numbers.get(i));
-                    displayAsDoubles= true;
+    public String divideNumbers()
+    {
+        String totalDivision= "Total Division is: ";
 
-            }
-            totalDivision+= "\n "+totalDivide;
+        double totalDivide=Double.parseDouble(numbers.get(0));
+        for (int i=1; i<numbers.size(); i++)
+        {
+
+            totalDivide/=Double.parseDouble(numbers.get(i));
 
 
+        }
+        totalDivision+= "\n "+totalDivide;
         return totalDivision;
     }
 
-    public double meanOfNumbers(){
+    public double meanOfNumbers()
+    {
         int length= numbers.size();
         return Double.parseDouble(totalSumNumbers())/ length;
     }
 
-    public String modeOfNumbers(){
+    public String modeOfNumbers()
+    {
         String mode= "";
         double maxValue=(Double.parseDouble(numbers.get(0)));
         double maxCount=0;
 
         for (int i=0; i<numbers.size(); i++) {
             int count=0;
-            for (int j=0; j<numbers.size(); j++) {
-              if (Double.parseDouble(numbers.get(i))==Double.parseDouble(numbers.get(j)) ){
+            for (int j=0; j<numbers.size(); j++)
+            {
+              if (Double.parseDouble(numbers.get(i))==Double.parseDouble(numbers.get(j)) )
+              {
                   count++;
               }
             }
-             if (count>maxCount){
+            if (count>maxCount)
+            {
                  maxCount= count;
                  maxValue= Double.parseDouble(numbers.get(i));
-             }
+            }
 
         }
         if (maxValue==0){
@@ -144,25 +153,6 @@ public class BasicCalculationsCalc {
 
        range= "Max is:"+ max + ", Min is "+ min;
         return range;
-    }
-    public double caculateOfNumbers(){
-       double caculate=Double.parseDouble(numbers.get(0));
-
-        for (int i=1; i<numbers.size(); i++) {
-            if (numbers.get(i).indexOf("+")!=-1){
-                caculate+=Double.parseDouble(numbers.get(i).substring(numbers.get(i).indexOf("+")+1));
-            }
-            if (numbers.get(i).indexOf("-")!=-1){
-                caculate-=Double.parseDouble(numbers.get(i).substring(numbers.get(i).indexOf("-")+1));
-            }
-            if (numbers.get(i).indexOf("*")!=-1){
-                caculate*=Double.parseDouble(numbers.get(i).substring(numbers.get(i).indexOf("*")+1));
-            }
-            if (numbers.get(i).indexOf("/")!=-1){
-                caculate/=Double.parseDouble(numbers.get(i).substring(numbers.get(i).indexOf("/")+1));
-            }
-        }
-        return caculate;
     }
 
 

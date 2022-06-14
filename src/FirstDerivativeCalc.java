@@ -28,7 +28,6 @@ public class FirstDerivativeCalc extends DerivativeCalc {
                 int coefficent= Integer.parseInt(derivative.get(i).substring(0,derivative.get(i).indexOf("x")));
                 int power= Integer.parseInt(derivative.get(i).substring(derivative.get(i).indexOf("^")+1));
                 slopeValue+= coefficent*Math.pow(Double.parseDouble(xValue), power);
-
             }
             else{
                slopeValue+= Integer.parseInt(derivative.get(i).substring(0,derivative.get(i).indexOf("x")));

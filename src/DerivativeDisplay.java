@@ -253,31 +253,6 @@ public class DerivativeDisplay extends JFrame implements ActionListener {
 
        }
 
-       /*if (result.equalsIgnoreCase("n")|| e.getActionCommand().equals("2 polynominals")){
-           String[]elementsPoly= txtField1.getText().split(",");
-           String[]elementsPoly2= txtField2.getText().split(",");
-           Collections.addAll(equation1, elementsPoly);
-           Collections.addAll(equation2, elementsPoly2);
-           System.out.println("Are you multiplying the polynomial or dividing (m)/(d)");
-           answerChoice= answer.nextLine();
-           Derivative de= new Derivative(equation1);
-
-           if(answerChoice.equalsIgnoreCase("m")){
-              derivative= de.productRule(equation1, equation2);
-              polyForm2= "Poly 1:"+  de.polyForm(equation1)+ "\n"+ "Poly 2: "+ de.polyForm(equation2);
-
-               txtField3.setText(derivative);
-               txtField4.setText(polyForm2);
-               txtField5.setText("Equation 1: " +de.polyForm(de.powerRule(equation1))+ "  Equation 2: " +de.polyForm(de.powerRule(equation2)));
-
-           }
-           if(answerChoice.equalsIgnoreCase("d")){
-               derivative= de.quotientRule(equation1, equation2);
-               polyForm2= "Poly 1:"+  de.polyForm(equation1)+ "\n"+ "Poly 2: "+ de.polyForm(equation2);
-               txtField3.setText(derivative);
-               txtField4.setText(polyForm2);
-           }
-       }*/
 
    }
 
